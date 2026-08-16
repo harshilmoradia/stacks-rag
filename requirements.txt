@@ -1,0 +1,10 @@
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-dotenv==1.0.1
+openai==1.51.0
+anthropic==0.36.0
+chromadb==0.5.15
+pypdf==5.0.1
+python-multipart==0.0.12
+pydantic-settings==2.5.2
+pytest==8.3.3
