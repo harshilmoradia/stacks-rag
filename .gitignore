@@ -5,3 +5,9 @@ chroma_data/
 .venv/
 venv/
 .pytest_cache/
+.DS_store
+
+
+#Frontend mono repo
+frontend/node_modules
+.next
