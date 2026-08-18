@@ -2,6 +2,7 @@ import logging
 import time
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app import embeddings, llm, vectorstore
@@ -14,6 +15,12 @@ logger = logging.getLogger("rag")
 
 app = FastAPI(title="Stacks RAG API", version="0.1.0")
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
+)
 
 class AskRequest(BaseModel):
     question: str
