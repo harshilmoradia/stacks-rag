@@ -3,7 +3,7 @@ import pathlib
 from mcp.server import MCPServer
 
 from app import embeddings, llm, vectorstore
-from app.chunking import chunk_text
+from app.chunking import chunk_document
 from app.config import settings
 from app.loaders import load_document
 
@@ -31,8 +31,8 @@ def ingest_file(file_path: str) -> str:
 
     raw = path.read_bytes()
     text = load_document(path.name, raw)
-    chunks = chunk_text(
-        text, source=path.name, chunk_size=settings.chunk_size, chunk_overlap=settings.chunk_overlap
+    chunks = chunk_document(
+        text, filename=path.name, chunk_size=settings.chunk_size, chunk_overlap=settings.chunk_overlap
     )
     if not chunks:
         return "Document produced no chunks."

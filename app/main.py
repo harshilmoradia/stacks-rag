@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app import embeddings, llm, vectorstore
-from app.chunking import chunk_text
+from app.chunking import chunk_document
 from app.config import settings
 from app.loaders import load_document
 
@@ -53,8 +53,8 @@ async def ingest(file: UploadFile = File(...)):
     if not text.strip():
         raise HTTPException(status_code=400, detail="No extractable text found in file.")
 
-    chunks = chunk_text(
-        text, source=file.filename, chunk_size=settings.chunk_size, chunk_overlap=settings.chunk_overlap
+    chunks = chunk_document(
+        text, filename=file.filename, chunk_size=settings.chunk_size, chunk_overlap=settings.chunk_overlap
     )
     if not chunks:
         raise HTTPException(status_code=400, detail="Document produced zero chunks.")
