@@ -1,0 +1,22 @@
+[
+    {
+      "question": "What's the best time of year to drive the California coast?",
+      "expected_source": "california_road_trip.md",
+      "expected_keywords": ["spring", "fall"]
+    },
+    {
+      "question": "What direction should I drive to get the ocean-side lane on Highway 1?",
+      "expected_source": "california_road_trip.md",
+      "expected_keywords": ["south", "north"]
+    },
+    {
+      "question": "What are the biggest costs to budget for on this trip?",
+      "expected_source": "california_road_trip.md",
+      "expected_keywords": ["lodging", "gas"]
+    },
+    {
+      "question": "Why should I bring layers and offline maps on this trip?",
+      "expected_source": "california_road_trip.md",
+      "expected_keywords": ["fog", "cell service"]
+    }
+  ]
