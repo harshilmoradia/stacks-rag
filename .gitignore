@@ -1,13 +1,26 @@
+# Environment
 .env
+.env.local
+!**/.env.example
+
+# Python
 __pycache__/
 *.pyc
-chroma_data/
+*.pyo
 .venv/
 venv/
 .pytest_cache/
-.DS_store
 
+# Vector store data
+chroma_data/
 
-#Frontend mono repo
-frontend/node_modules
-.next
+# macOS
+.DS_Store
+
+# Backend – uploaded / ingested files
+backend/data/uploads/
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/.env*.local
