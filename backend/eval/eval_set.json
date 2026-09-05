@@ -1,22 +1,91 @@
 [
-    {
-      "question": "What's the best time of year to drive the California coast?",
-      "expected_source": "california_road_trip.md",
-      "expected_keywords": ["spring", "fall"]
-    },
-    {
-      "question": "What direction should I drive to get the ocean-side lane on Highway 1?",
-      "expected_source": "california_road_trip.md",
-      "expected_keywords": ["south", "north"]
-    },
-    {
-      "question": "What are the biggest costs to budget for on this trip?",
-      "expected_source": "california_road_trip.md",
-      "expected_keywords": ["lodging", "gas"]
-    },
-    {
-      "question": "Why should I bring layers and offline maps on this trip?",
-      "expected_source": "california_road_trip.md",
-      "expected_keywords": ["fog", "cell service"]
-    }
-  ]
+  {
+    "question": "What's the best time of year to drive the California coast?",
+    "expected_source": "california_road_trip.md",
+    "expected_keywords": ["spring", "fall"]
+  },
+  {
+    "question": "What direction should I drive to get the ocean-side lane on Highway 1?",
+    "expected_source": "california_road_trip.md",
+    "expected_keywords": ["south", "north"]
+  },
+  {
+    "question": "What are the biggest costs to budget for on this trip?",
+    "expected_source": "california_road_trip.md",
+    "expected_keywords": ["lodging", "gas"]
+  },
+  {
+    "question": "Why should I bring layers and offline maps on this trip?",
+    "expected_source": "california_road_trip.md",
+    "expected_keywords": ["fog", "cell service"]
+  },
+  {
+    "question": "What water temperature should I use for pour-over coffee?",
+    "expected_source": "coffee_brewing_guide.md",
+    "expected_keywords": ["195", "205"]
+  },
+  {
+    "question": "How long should coffee beans rest before I consider them fresh?",
+    "expected_source": "coffee_brewing_guide.md",
+    "expected_keywords": ["two weeks"]
+  },
+  {
+    "question": "What ratio of coffee to water should I use for brewing?",
+    "expected_source": "coffee_brewing_guide.md",
+    "expected_keywords": ["1:16"]
+  },
+  {
+    "question": "How should I store coffee beans to keep them fresh longest?",
+    "expected_source": "coffee_brewing_guide.md",
+    "expected_keywords": ["airtight", "light"]
+  },
+  {
+    "question": "What percentage of my income should go toward rent?",
+    "expected_source": "apartment_budgeting.md",
+    "expected_keywords": ["30%"]
+  },
+  {
+    "question": "How much should I expect to pay as a security deposit?",
+    "expected_source": "apartment_budgeting.md",
+    "expected_keywords": ["one", "two months"]
+  },
+  {
+    "question": "What insurance do I need as a renter and what does it cover?",
+    "expected_source": "apartment_budgeting.md",
+    "expected_keywords": ["renters insurance", "liability"]
+  },
+  {
+    "question": "What non-rent costs should I budget for when moving in?",
+    "expected_source": "apartment_budgeting.md",
+    "expected_keywords": ["application fee", "moving"]
+  },
+  {
+    "question": "I'm moving somewhere new for a job and driving myself there — what should I plan for financially and on the road?",
+    "expected_source": "apartment_budgeting.md",
+    "expected_keywords": ["moving costs"]
+  },
+  {
+    "question": "If I want good coffee while road-tripping, what temperature should I brew at and what season should I travel in?",
+    "expected_source": "coffee_brewing_guide.md",
+    "expected_keywords": ["205"],
+    "note": "cross-doc: combined question spanning two docs"
+  },
+  {
+    "question": "What should I budget for and how should I store things for a long trip?",
+    "expected_source": "california_road_trip.md",
+    "expected_keywords": ["lodging"],
+    "note": "cross-doc: ambiguous 'store' (coffee storage vs trip logistics)"
+  },
+  {
+    "question": "What's the best ski resort in Colorado for beginners?",
+    "expect_no_answer": true
+  },
+  {
+    "question": "How do I fix a flat tire on a road bike?",
+    "expect_no_answer": true
+  },
+  {
+    "question": "How do I file taxes as a freelancer?",
+    "expect_no_answer": true
+  }
+]

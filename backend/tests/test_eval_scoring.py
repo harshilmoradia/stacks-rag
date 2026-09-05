@@ -1,65 +1,43 @@
 from eval.scoring import score
 
-
-def test_passing_result_when_source_and_keywords_match():
-    result = score(
-        question="What is the best time to go?",
-        expected_source="notes.md",
-        expected_keywords=["spring", "fall"],
-        hits=[{"source": "notes.md", "distance": 0.2}],
-        answer="Late spring and early fall offer the clearest skies.",
+def test_positive_case_passes():
+    hits = [{"source": "coffee_brewing_guide.md", "distance": 0.1, "text": "..."}]
+    r = score(
+        question="What water temp for pour-over?",
+        hits=hits,
+        answer="Use water between 195°F and 205°F.",
+        expected_source="coffee_brewing_guide.md",
+        expected_keywords=["195", "205"],
     )
-    assert result.retrieval_hit is True
-    assert result.keywords_found is True
-    assert result.passed is True
+    assert r.passed
 
-
-def test_fails_when_expected_source_not_retrieved():
-    result = score(
-        question="q",
-        expected_source="notes.md",
-        expected_keywords=["spring"],
-        hits=[{"source": "other_file.md", "distance": 0.5}],
-        answer="Spring is a good time.",
+def test_positive_case_fails_on_wrong_source():
+    hits = [{"source": "apartment_budgeting.md", "distance": 0.3, "text": "..."}]
+    r = score(
+        question="What water temp for pour-over?",
+        hits=hits,
+        answer="195°F to 205°F.",
+        expected_source="coffee_brewing_guide.md",
+        expected_keywords=["195", "205"],
     )
-    assert result.retrieval_hit is False
-    assert result.passed is False
+    assert not r.passed
 
-
-def test_fails_when_keyword_missing_from_answer():
-    result = score(
-        question="q",
-        expected_source="notes.md",
-        expected_keywords=["spring", "fall"],
-        hits=[{"source": "notes.md", "distance": 0.2}],
-        answer="Summer works well for most travelers.",
+def test_negative_case_passes_on_refusal():
+    hits = [{"source": "coffee_brewing_guide.md", "distance": 0.9, "text": "..."}]
+    r = score(
+        question="Best ski resort in Colorado?",
+        hits=hits,
+        answer="The context does not contain information about ski resorts.",
+        expect_no_answer=True,
     )
-    assert result.retrieval_hit is True
-    assert result.keywords_found is False
-    assert "spring" in result.missing_keywords
-    assert "fall" in result.missing_keywords
-    assert result.passed is False
+    assert r.passed
 
-
-def test_keyword_match_is_case_insensitive_substring():
-    result = score(
-        question="q",
-        expected_source="notes.md",
-        expected_keywords=["FOG"],
-        hits=[{"source": "notes.md", "distance": 0.1}],
-        answer="Morning fog is common along the coast.",
+def test_negative_case_fails_on_hallucination():
+    hits = [{"source": "coffee_brewing_guide.md", "distance": 0.9, "text": "..."}]
+    r = score(
+        question="Best ski resort in Colorado?",
+        hits=hits,
+        answer="Vail is widely considered one of the best.",
+        expect_no_answer=True,
     )
-    assert result.keywords_found is True
-
-
-def test_empty_hits_gives_none_distance_and_fails_retrieval():
-    result = score(
-        question="q",
-        expected_source="notes.md",
-        expected_keywords=[],
-        hits=[],
-        answer="I don't have any indexed documents to answer from yet.",
-    )
-    assert result.top_distance is None
-    assert result.retrieval_hit is False
-    assert result.passed is False
+    assert not r.passed

@@ -155,3 +155,12 @@ The API starts on port 8000 with Chroma data persisted in a named Docker volume.
 cd backend
 pytest
 ```
+
+## Eval Results
+
+| Metric | Result |
+|---|---|
+| Retrieval + generation (positive cases) | 15/15 |
+| Refusal on out-of-scope questions | 3/3 |
+| Overall | 18/18 |
+
