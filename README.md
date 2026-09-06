@@ -158,9 +158,41 @@ pytest
 
 ## Eval Results
 
-| Metric | Result |
-|---|---|
-| Retrieval + generation (positive cases) | 15/15 |
-| Refusal on out-of-scope questions | 3/3 |
-| Overall | 18/18 |
+## Eval Results
 
+Run the eval yourself:
+
+```bash
+cd backend
+python -m eval.run_eval             # against local pipeline
+python -m eval.run_eval_live <url>  # against a deployed instance, e.g.
+                                     # python -m eval.run_eval_live https://stacks-rag-api.onrender.com
+```
+
+`run_eval_live.py` calls the deployed `/ask` endpoint over HTTP — it's
+the only check that actually exercises the real network path, CORS
+config, rate limiter, and cold-start ingestion together, rather than
+calling internal functions directly in-process.
+
+**Live demo:** https://your-app.onrender.com
+
+| Metric | Local | Live |
+|---|---|---|
+| Retrieval + generation (positive cases) | 15/15 | 15/15 |
+| Refusal on out-of-scope questions | 3/3 | 3/3 |
+| Overall | 18/18 | 18/18 |
+
+
+### Known limitations
+
+- **No similarity threshold on retrieval** — `vectorstore.query()`
+  always returns the top-k nearest chunks regardless of relevance.
+  Out-of-scope refusal is currently handled entirely by the generation
+  system prompt, not by filtering irrelevant chunks before they reach
+  the LLM. Validated by a 3/3 pass rate on negative eval cases, but
+  this remains prompt-dependent rather than retrieval-enforced.
+- **In-memory rate limiter** — `/ask` is capped at 20 requests/day/IP
+  to protect against runaway API costs on a free-tier deployment. This
+  resets on every restart and isn't IP-normalized behind a proxy — it
+  exists to stop accidental cost overruns on a demo, not as a
+  production-grade rate limiter.
